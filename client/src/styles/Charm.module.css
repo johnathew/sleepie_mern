@@ -1,0 +1,36 @@
+.charmMain {
+  border: 1px solid rgb(139, 234, 249);
+  border-radius: 10px;
+  background-color: rgb(243, 235, 235);
+  color: rgb(246, 80, 80);
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  text-transform: lowercase;
+}
+
+.charmTitle {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.charmDesc {
+  white-space: pre-wrap;
+  color: rgb(255, 104, 104);
+  overflow: hidden;
+}
+
+.charmPrice {
+  font: bold;
+  margin-top: 10px;
+}
+
+.charmImg {
+  border-radius: 10px;
+}
+
+.charmFooter {
+  color: rgb(255, 104, 104);
+  opacity: 0.8;
+  border-top: 0.5px dashed rgb(255, 104, 104);
+}

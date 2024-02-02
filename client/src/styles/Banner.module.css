@@ -1,0 +1,10 @@
+.logoContainer {
+  text-align: center;
+  padding: 10px;
+}
+
+.logo {
+  height: 12rem;
+  width: 12rem;
+  border-radius: 10rem;
+}

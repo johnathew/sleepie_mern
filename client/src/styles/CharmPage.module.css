@@ -1,0 +1,13 @@
+
+.charm {
+  min-width: 150px;
+}
+
+.charm:hover {
+  background: linear-gradient(
+    180deg,
+    rgb(170, 240, 248) 8%,
+    rgba(255, 209, 209, 1) 69%
+  );
+  transition-duration: 500ms;
+}
