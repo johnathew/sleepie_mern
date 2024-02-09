@@ -7,4 +7,5 @@ export interface Charm {
   imgUrl: string;
   createdAt: string;
   updatedAt: string;
+  slug: string;
 }

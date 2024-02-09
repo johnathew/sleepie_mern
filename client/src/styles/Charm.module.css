@@ -1,12 +1,14 @@
 .charmMain {
-  border: 1px solid rgb(139, 234, 249);
+  border: 1px solid rgba(255, 197, 197, 0.938);
   border-radius: 10px;
-  background-color: rgb(243, 235, 235);
-  color: rgb(246, 80, 80);
+  background-color: rgba(243, 235, 235, 0.669);
+  color: rgba(247, 120, 120, 0.982);
   text-align: center;
   align-items: center;
-  height: 100%;
+  height: auto;
+  width: auto;
   text-transform: lowercase;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
 .charmTitle {
@@ -27,6 +29,8 @@
 
 .charmImg {
   border-radius: 10px;
+  width: 70%;
+  height: auto;
 }
 
 .charmFooter {

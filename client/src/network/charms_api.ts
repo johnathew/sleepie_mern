@@ -23,7 +23,6 @@ export interface SignUpCredentials {
   password: string;
 }
 
-
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
   const response = await fetchData("/api/users/signup", {
     method: "POST",
@@ -55,4 +54,26 @@ export async function login(credentials: LoginCredentials): Promise<User> {
 
 export async function logout() {
   await fetchData("/api/users/logout", { method: "POST" });
+}
+
+export async function fetchCharms() {
+  try {
+    const response = await fetch("/api/charms", { method: "GET" });
+    const charms = await response.json();
+    return charms;
+  } catch (error) {
+    console.error(error);
+    alert(error);
+  }
+}
+
+export async function fetchCharm(slug: string) {
+  try {
+    const response = await fetch(`/api/charms/${slug}`, { method: "GET" });
+    const charm = await response.json();
+    return charm;
+  } catch (error) {
+    console.error(error);
+    alert(error);
+  }
 }

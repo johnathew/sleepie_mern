@@ -5,9 +5,10 @@ import userRoutes from "./routes/users";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 import session from "express-session";
-const app = express();
 import env from "./util/validateEnv";
 import MongoStore from "connect-mongo";
+
+const app = express();
 
 app.use(morgan("dev"));
 

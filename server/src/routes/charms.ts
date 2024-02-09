@@ -5,12 +5,16 @@ const router = express.Router();
 
 router.get("/", CharmsController.getCharms);
 
-router.get("/:charmId", CharmsController.getCharm);
+router.get("/:slug", CharmsController.getCharm);
 
 router.post("/", CharmsController.createCharm);
 
-router.patch("/:charmId", CharmsController.updateNote);
+router.patch("/:charmId", CharmsController.updateCharm);
 
-router.delete("/:charmId",  )
+// router.delete("/:charmId", CharmsController.deleteCharm);
+
+router.post("/updateAll", CharmsController.updateAllCharms);
+
+router.post("/removeKeyValue", CharmsController.removeKeyValue);
 
 export default router;

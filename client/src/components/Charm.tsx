@@ -3,20 +3,22 @@ import { Card } from "react-bootstrap";
 import styles from "../styles/Charm.module.css"
 import { formatDate } from "../utils/formatDate";
 
-interface CharmProps {
+
+export interface CharmProps {
   charm: CharmModel,
   className?: string,
 }
 
 const Charm = ({ charm, className }: CharmProps) => {
 
-  let createdUpdatedText: string;
+  let createdUpdatedText: string | undefined;
 
   if (charm.updatedAt > charm.createdAt) {
     createdUpdatedText = "Updated: " + formatDate(charm.updatedAt)
   } else {
     createdUpdatedText = "Created: " + formatDate(charm.createdAt)
   }
+
 
   return (
     <Card className={`${styles.charmMain} ${className}`}>

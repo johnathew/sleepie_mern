@@ -1,13 +1,32 @@
 
 .charm {
   min-width: 150px;
+  width: 300px;
+  height: auto;
+  z-index: 1;
+  @media screen and (max-width: 768px) {
+    width: 231px;
+  }
 }
 
 .charm:hover {
+  transform: scale(1.1);
+  animation-duration: 1000ms;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   background: linear-gradient(
     180deg,
-    rgb(170, 240, 248) 8%,
-    rgba(255, 209, 209, 1) 69%
+    rgba(170, 240, 248, 0.738) 8%,
+    rgba(255, 209, 209, 0.508) 69%
   );
+
+  
   transition-duration: 500ms;
+}
+
+.cardLinks {
+  width: auto;
+  height: 100%;
+  padding: 0px;
+  margin: 2rem;
+  
 }

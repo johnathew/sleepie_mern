@@ -9,7 +9,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(240, 240, 240);
+  background-color: rgba(162, 222, 243, 0.651);
 }
 
 a {
@@ -21,18 +21,18 @@ a:hover {
   color: #535bf2;
 }
 
-main {
-  background-color: rgb(240, 240, 240);
-}
-
 body {
   font-family: "MoreSugar", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: small;
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: rgba(162, 222, 243, 0.651);
+  background-image: url("../assets/floralFrame.svg");
+  background-blend-mode: overlay;
+  background-position: fixed;
+  background-position-x: 100%;
+  background-size: 100%;
 }
 
 h1 {
@@ -40,7 +40,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+/* button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -48,16 +48,13 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  
 }
 button:hover {
   border-color: #646cff;
 }
 button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+button */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -73,16 +70,10 @@ button:focus-visible {
 }
 
 header {
-  background: rgb(240, 240, 240);
-  background: linear-gradient(
-    180deg,
-    rgb(240, 240, 240) 4%,
-    rgba(255, 255, 255, 0) 52%
-  );
-  justify-content: space-around;
+  justify-content: center;
   display: flex;
   height: 10vh;
-  color: rgb(243, 115, 198);
+  color: #fd9bdb;
   align-items: center;
   position: fixed;
   top: 0;
@@ -90,15 +81,22 @@ header {
   z-index: 100;
 }
 
+main {
+  padding: 10vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
 footer {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(240, 240, 240), rgba(255, 255, 255, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 2vh;
   position: fixed;
-  color: blue;
+  color: rgb(243, 115, 198);
   bottom: 0;
   width: 100%;
   z-index: 100;
@@ -107,8 +105,18 @@ footer {
 .btn-nav {
   background-color: rgb(145, 222, 241);
   opacity: 0.8;
+  border: 1px solid rgba(243, 115, 198, 0.427);
   color: rgb(243, 115, 198);
+  cursor: pointer;
   padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  @media screen and (max-width: 768px) {
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+.btn-nav:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .btn-nav:hover {
@@ -119,4 +127,12 @@ footer {
 .btn-xxl {
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
+}
+
+#dropdown-basic {
+  padding: 0.5rem 0.5rem;
+  border-radius: 6px;
+  @media screen and (max-width: 768px) {
+    padding: 0.3rem 0.5rem;
+  }
 }
