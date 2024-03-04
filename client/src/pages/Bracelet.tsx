@@ -1,17 +1,30 @@
 import { useQuery, HydrationBoundary } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { fetchCharm } from "../network/charms_api";
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../styles/Product.module.css";
 import Charm from "../components/Charm";
 
+
+export function loader({ params }) {
+  console.log(params);
+}
+
 const Bracelet = ({ dehydratedState }: { dehydratedState: unknown }) => {
+  // retrieve the charm id from the url
   const { id } = useParams();
 
+  // get the charm type from the url
+  const location = useLocation();
+  const regex = /\/([^/]*)\//;
+  const match = regex.exec(location.pathname);
+  const charmType = match ? match[1] : null;
+
+  // fetch the charm data
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["charm", { id }],
-    queryFn: () => fetchCharm(id!),
+    queryKey: ["charm", { id, type: charmType }],
+    queryFn: () => fetchCharm(charmType, id),
   });
 
 

@@ -4,7 +4,7 @@ import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import slugify from "slugify";
 
-export const getCharms: RequestHandler = async (req, res, next) => {
+export const getCharms: RequestHandler = async (_, res, next) => {
   try {
     const charms = await CharmModel.find().exec();
     res.status(200).json(charms); // http status = ok, turns json from backend to send to frontend
@@ -14,7 +14,7 @@ export const getCharms: RequestHandler = async (req, res, next) => {
 };
 
 export const getCharm: RequestHandler = async (req, res, next) => {
-  const slug = req.params.slug
+  const slug = req.params.slug;
 
   try {
     const charm = await CharmModel.findOne({ slug: slug }).exec();
@@ -23,6 +23,24 @@ export const getCharm: RequestHandler = async (req, res, next) => {
       throw createHttpError(404, "Charm not found");
     }
     res.status(200).json(charm);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getCharmsOfType: RequestHandler = async (req, res, next) => {
+  // retrieve the type from the request path, removes the last character so that path name is plural, while the type is singular
+  const type = req.path.split("/").pop()?.slice(0, -1);
+
+  try {
+    const charms = await CharmModel.find({ type: type }).exec();
+
+    if (charms.length === 0) {
+      throw createHttpError(404, `No ${type} found.`);
+    }
+    res.status(200).json(charms);
+
+    console.log("charms", charms);
   } catch (error) {
     next(error);
   }

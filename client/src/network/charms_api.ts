@@ -1,5 +1,7 @@
+import { ConflictError, NotFoundError } from "@/components/errors/http_errors";
 import { User } from "../models/users";
 
+// credentials fetch?
 async function fetchData(input: RequestInfo, init?: RequestInit) {
   const response = await fetch(input, init);
 
@@ -18,7 +20,6 @@ export async function getLoggedInUser(): Promise<User> {
 }
 
 export interface SignUpCredentials {
-  username: string;
   email: string;
   password: string;
 }
@@ -32,7 +33,22 @@ export async function signUp(credentials: SignUpCredentials): Promise<User> {
     body: JSON.stringify(credentials),
   });
 
-  return response.json();
+  if (response.ok) {
+    return response.json();
+  } else {
+    const errorBody = await response.json();
+    const errorMessage = errorBody.error;
+    if (response.status === 409) {
+      throw new ConflictError(errorMessage);
+    } else {
+      throw new Error(
+        "Request failed with status code: " +
+          response.status +
+          "message: " +
+          errorMessage
+      );
+    }
+  }
 }
 
 export interface LoginCredentials {
@@ -67,9 +83,32 @@ export async function fetchCharms() {
   }
 }
 
-export async function fetchCharm(slug: string) {
+export async function fetchCharmsOfType(type: string | null) {
+  const response = await fetch(`/api/charms/${type}`, { method: "GET" });
+  if (response.ok) {
+    const charmTypes = await response.json();
+    return charmTypes;
+  } else {
+    const errorBody = await response.json();
+    const errorMessage = errorBody.error;
+    if (response.status === 404) {
+      console.error(errorMessage);
+      throw new NotFoundError(errorMessage);
+    } else {
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }
+}
+
+export async function fetchCharm(
+  type: string | null,
+  slug: string | undefined
+) {
   try {
-    const response = await fetch(`/api/charms/${slug}`, { method: "GET" });
+    const response = await fetch(`/api/charms/${type}/${slug}`, {
+      method: "GET",
+    });
     const charm = await response.json();
     return charm;
   } catch (error) {

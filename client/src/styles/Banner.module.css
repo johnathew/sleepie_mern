@@ -1,20 +1,24 @@
 .logoContainer {
-  text-align: center;
-  padding-bottom: 0;
+  @media screen and (max-width: 768px) {
+    background-size: cover;
+    border-radius: 1%;
+    background-size: cover;
+    background-position: 45%;
+  }
 }
 
 .logo {
-  height: 12rem;
-  width: 12rem;
+  height: 5rem;
+  justify-content: center;
+  width: 5rem;
   border-radius: 10rem;
-  border: 1px solid rgba(255, 197, 197, 0.938);
+  padding: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  opacity: 1
+  opacity: 1;
+  transition: 1000ms;
 }
 
 .logo:hover {
   opacity: 0.8;
   transition: 1000ms;
 }
-
-

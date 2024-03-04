@@ -1,8 +1,6 @@
 import { Charm as CharmModel } from "../models/charm";
-import { Card } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import styles from "../styles/Charm.module.css"
-import { formatDate } from "../utils/formatDate";
-
 
 export interface CharmProps {
   charm: CharmModel,
@@ -10,33 +8,20 @@ export interface CharmProps {
 }
 
 const Charm = ({ charm, className }: CharmProps) => {
-
-  let createdUpdatedText: string | undefined;
-
-  if (charm.updatedAt > charm.createdAt) {
-    createdUpdatedText = "Updated: " + formatDate(charm.updatedAt)
-  } else {
-    createdUpdatedText = "Created: " + formatDate(charm.createdAt)
-  }
-
-
   return (
     <Card className={`${styles.charmMain} ${className}`}>
-      <Card.Body>
+      <Image src={charm.imgUrl} className={styles.charmImg} thumbnail alt='Jewelry image' />
+      <Card.Body className={styles.charmBody}>
         <Card.Title className={styles.charmTitle}>
           {charm.name}
         </Card.Title>
-        <Card.Img className={styles.charmImg} variant="top" src={charm.imgUrl} alt='Jewelry image' />
         <Card.Text className={styles.charmPrice}>
           {`$${charm.price}`}
         </Card.Text>
-        <Card.Subtitle className={styles.charmDesc}>
-          {charm.desc}
-        </Card.Subtitle>
       </Card.Body>
-      <Card.Footer className={styles.charmFooter}>
-        {createdUpdatedText}
-      </Card.Footer>
+      <Card.Subtitle className={styles.charmDesc}>
+        {charm.desc}
+      </Card.Subtitle>
     </Card>
   )
 };

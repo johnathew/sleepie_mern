@@ -25,7 +25,6 @@ export const getAuthenticatedUserId: RequestHandler = async (
 };
 
 interface SignupBody {
-  username?: string;
   email?: string;
   password?: string;
 }
@@ -36,20 +35,15 @@ export const signup: RequestHandler<
   SignupBody,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.username;
   const email = req.body.email;
   const passwordRaw = req.body.password;
 
   try {
-    if (!username || !email || !passwordRaw) {
-      throw createHttpError(400, "Missing username, email or password");
+    if (!email || !passwordRaw) {
+      throw createHttpError(400, "Missing email or password");
     }
-    const existingUsername = await UserModel.findOne({
-      username: username,
-    }).exec();
-    if (existingUsername) {
-      throw createHttpError(409, "Username already exists");
-    }
+
+
     const existingEmail = await UserModel.findOne({ email: email }).exec();
     if (existingEmail) {
       throw createHttpError(
@@ -61,7 +55,6 @@ export const signup: RequestHandler<
     const passwordHashed = await bcrypt.hash(passwordRaw, 10);
 
     const newUser = await UserModel.create({
-      username: username,
       email: email,
       password: passwordHashed,
     });
@@ -69,13 +62,14 @@ export const signup: RequestHandler<
     req.session.userId = newUser._id;
 
     res.status(201).json(newUser);
+  
   } catch (error) {
     next(error);
   }
 };
 
 interface LoginBody {
-  username?: string;
+  email?: string;
   password?: string;
 }
 
@@ -85,20 +79,20 @@ export const login: RequestHandler<
   LoginBody,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
   try {
-    if (!username || !password) {
-      throw createHttpError(400, "Missing username or password");
+    if (!email || !password) {
+      throw createHttpError(400, "Missing email or password");
     }
 
-    const user = await UserModel.findOne({ username: username })
+    const user = await UserModel.findOne({ email: email })
       .select("+password +email")
       .exec();
 
     if (!user) {
-      throw createHttpError(401, "Invalid username or password");
+      throw createHttpError(401, "Invalid email or password");
     }
 
     const passwordValid = await bcrypt.compare(password, user.password);

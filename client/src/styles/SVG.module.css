@@ -1,0 +1,21 @@
+
+.linkText:hover {
+    text-decoration-line: underline;
+
+}
+
+.logoMain {
+    scale: 0.5;
+    @media screen and (max-width: 768px) {
+        scale: 1;
+        
+    }
+}
+
+.navSVG {
+    scale: 0.5;
+    @media screen and (max-width: 768px) {
+        scale: 1;
+        
+    }
+}

@@ -28,6 +28,8 @@ app.use(
     }),
   })
 );
+// store the session in the database using the MongoStore
+// update in production to use a secure cookie
 
 app.use("/api/charms", charmRoutes);
 app.use("/api/users", userRoutes);

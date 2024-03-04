@@ -1,0 +1,9 @@
+.headerTitle {
+    font-size: 2rem;
+    color: rgb(222, 210, 218);
+    text-align: center;
+    margin-top: 2rem;
+    @media screen and (max-width: 768px) {
+    font-size: 0rem;
+    }
+  }
