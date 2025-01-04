@@ -16,9 +16,6 @@ import Bookmarks from "./pages/Bookmarks";
 import Necklaces from "./pages/Necklaces";
 import Authentication from "./pages/Authentication";
 
-
-
-
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<RootLayout />} errorElement={<Error />}>
         <Route index element={<Home />} />
@@ -38,9 +35,6 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 
 export function Router() {
-
-
-
 
     return <RouterProvider router={router} />
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import Charms from "../components/Charms";
 import { dehydrate } from "@tanstack/react-query";
 

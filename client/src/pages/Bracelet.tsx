@@ -7,7 +7,7 @@ import styles from "../styles/Product.module.css";
 import Charm from "../components/Charm";
 
 
-export function loader({ params }) {
+export function loader({ params }: { params: { id: string } }) {
   console.log(params);
 }
 
