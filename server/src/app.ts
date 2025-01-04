@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
+import cors from "cors";
 import charmRoutes from "./routes/charms";
 import userRoutes from "./routes/users";
 import morgan from "morgan";
@@ -13,6 +14,7 @@ const app = express();
 app.use(morgan("dev"));
 
 app.use(express.json());
+app.use(cors({ origin: env.APP_ORIGIN, credentials: true }));
 
 app.use(
   session({

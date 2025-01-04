@@ -6,4 +6,5 @@ export default cleanEnv(process.env, {
   PORT: port(),
   SESSION_SECRET: str(),
   STRIPE_SECRET_KEY: str(),
+  APP_ORIGIN: str(),
 });
