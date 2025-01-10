@@ -2,18 +2,13 @@ name: Deploy MERN App
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   build-client:
-    runs-on: ubuntu-22.04
-
-    permissions:
-      contents: read
-      packages: write
-      attestations: write
-      id-token: write
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Source
@@ -27,12 +22,6 @@ jobs:
 
   build-server:
     runs-on: ubuntu-22.04
-
-    permissions:
-      contents: read
-      packages: write
-      attestations: write
-      id-token: write
 
     steps:
       - name: Checkout Source
