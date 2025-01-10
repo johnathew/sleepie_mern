@@ -10,6 +10,12 @@ jobs:
   build-client:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
@@ -22,6 +28,12 @@ jobs:
 
   build-server:
     runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
 
     steps:
       - name: Checkout Source
