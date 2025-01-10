@@ -12,9 +12,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
-      attestations: write
-      id-token: write
+      pages: write
 
     steps:
       - name: Checkout Source
@@ -36,9 +34,7 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
-      attestations: write
-      id-token: write
+      pages: write
 
     steps:
       - name: Checkout Source
