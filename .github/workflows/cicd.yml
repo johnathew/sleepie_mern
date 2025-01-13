@@ -14,8 +14,11 @@ jobs:
 
     permissions:
       contents: write
+      deployments: write
+      pull-requests: write
       packages: write
       id-token: write
+      actions: write
 
     steps:
       - name: Checkout Source
