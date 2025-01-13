@@ -21,10 +21,17 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build Client Docker Image
-        run: docker build -t johnathew/sleepie_mern/client ./client
+        run: docker build -t johnathew/sleepie_mern:client ./client
+
       - name: Publish Client Image to Docker Hub
-        run: docker push johnathew/sleepie_mern/client:latest
+        run: docker push johnathew/sleepie_mern:client:latest
 
   build-server:
     runs-on: ubuntu-latest
@@ -33,17 +40,24 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build Server Docker Image
-        run: docker build -t johnathew/sleepie_mern/server ./server
+        run: docker build -t johnathew/sleepie_mern:server ./server
+
       - name: Publish Server Image to Docker Hub
-        run: docker push johnathew/sleepie_mern/server:latest
+        run: docker push johnathew/sleepie_mern:server:latest
 
   deploy-client:
     needs: build-client
     runs-on: self-hosted
     steps:
       - name: Pull Client Image from Docker Hub
-        run: docker pull johnathew/sleepie_mern/client:latest
+        run: docker pull johnathew/sleepie_mern:client:latest
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -55,14 +69,14 @@ jobs:
         run: docker rm -f sleepie_mern_client
         continue-on-error: true
       - name: Run Client Docker Container
-        run: docker run -d -p 5173:5173 --name sleepie_mern_client johnathew/sleepie_mern/client:latest
+        run: docker run -d -p 5173:5173 --name sleepie_mern_client johnathew/sleepie_mern:client:latest
 
   deploy-server:
     needs: build-server
     runs-on: self-hosted
     steps:
       - name: Pull Server Image from Docker Hub
-        run: docker pull johnathew/sleepie_mern/server:latest
+        run: docker pull johnathew/sleepie_mern:server:latest
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
@@ -74,4 +88,4 @@ jobs:
         run: docker rm -f sleepie_mern_server
         continue-on-error: true
       - name: Run Server Docker Container
-        run: docker run -d -p 3000:3000 --name sleepie_mern_server -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern/server:latest
+        run: docker run -d -p 3000:3000 --name sleepie_mern_server -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server:latest
