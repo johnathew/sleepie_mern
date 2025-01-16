@@ -48,7 +48,7 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Pull Client Image from Docker Hub
-        run: docker pull johnathew/sleepie_mern/client:latest
+        run: docker pull johnathew/sleepie_mern:client-${{github.run_number}}
 
       - name: Delete Old Client Container
         run: docker rm -f sleepie_mern_client
@@ -67,7 +67,7 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Pull Server Image from Docker Hub
-        run: docker pull johnathew/sleepie_mern/server:latest
+        run: docker pull johnathew/sleepie_mern:server-${{github.run_number}}
 
       - name: Delete Old Server Container
         run: docker rm -f sleepie_mern_server
