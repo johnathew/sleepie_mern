@@ -32,9 +32,11 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Publish Client Image to Docker Hub
+        working-directory: ./client
         run: docker push johnathew/sleepie_mern:client-${{github.run_number}}
 
       - name: Publish Server Image to Docker Hub
+        working-directory: ./server
         run: docker push johnathew/sleepie_mern:server-${{github.run_number}}
 
   deploy-client:
@@ -73,4 +75,4 @@ jobs:
         run: docker rm -f sleepie_mern_server
         continue-on-error: true
       - name: Run Server Docker Container
-        run: docker run -d -p 3000:3000 --name sleepie_mern_server -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server-${{github.run_number}}
+        run: docker run --name sleepie_mern_server -d -p 3000:3000 -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server
