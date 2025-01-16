@@ -1,4 +1,5 @@
-version: 4.17.0
+name: mern-app
+
 services:
   client:
     build: ./client
@@ -13,10 +14,14 @@ services:
     tty: true
   server:
     # Telling docker-compose to build the client image using the Dockerfile in the server directory.
-    build: ./server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
     container_name: server
-    ports:
-      - "5000:5000"
+    env_file: ./server/.env
     volumes:
       - ./server:/app
       - ./app/node_modules
+    ports:
+      - "5000:5000"

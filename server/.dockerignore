@@ -1,7 +1,9 @@
 Dockerfile
 .dockerignore
+dist
 node_modules
-npm-debug.log
+debug.log
 README.md
 .git
-yarn-error.log
+yarn - error.log
+.env
