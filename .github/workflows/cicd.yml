@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Client Docker Image
-        run: docker build -t johnathew/sleepie_mern:client .
+        run: docker build -t johnathew/sleepie_mern/client .
 
       - name: Publish Client Image to Docker Hub
         run: docker push johnathew/sleepie_mern:client
@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Server Docker Image
-        run: docker build -t johnathew/sleepie_mern:server .
+        run: docker build -t johnathew/sleepie_mern/server .
 
       - name: Publish Server Image to Docker Hub
         run: docker push johnathew/sleepie_mern:server
