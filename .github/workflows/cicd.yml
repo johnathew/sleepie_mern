@@ -54,7 +54,7 @@ jobs:
         run: docker rm -f sleepie_mern_client
         continue-on-error: true
       - name: Run Client Docker Container
-        run: docker run -d -p 5173:5173 --name sleepie_mern_client johnathew/sleepie_mern/client:latest
+        run: docker run -d -p 5173:5173 --name sleepie_mern_client johnathew/sleepie_mern:client-${{github.run_number}}
 
   deploy-server:
     needs: deploy-client
@@ -73,4 +73,4 @@ jobs:
         run: docker rm -f sleepie_mern_server
         continue-on-error: true
       - name: Run Server Docker Container
-        run: docker run -d -p 3000:3000 --name sleepie_mern_server -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern/server:latest
+        run: docker run -d -p 3000:3000 --name sleepie_mern_server -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server-${{github.run_number}}
