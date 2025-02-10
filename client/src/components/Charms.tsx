@@ -27,7 +27,7 @@ const Charms = ({ dehydratedState }: { dehydratedState: unknown }) => {
 
     return (
         <>
-            {isFetching && <div id="loading-status"><Spinner animation="grow" className="bg-red-400" role='status'><span className="visually-hidden">Loading...</span></Spinner> </div>}
+            {isFetching && <div id="loading-status"><Spinner animation="grow" className="bg-red-400" role='status'><span className="visually-hidden">Loading....</span></Spinner> </div>}
             <HydrationBoundary state={dehydratedState}>
                 {data &&
                     <Container>
