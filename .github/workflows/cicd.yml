@@ -79,4 +79,4 @@ jobs:
         run: docker rm -f sleepie_mern_server
         continue-on-error: true
       - name: Run Server Docker Container
-        run: docker run --name sleepie_mern_server -d -p 3000:3000 -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server
+        run: docker run --name sleepie_mern_server -d -p 3000:3000 -e MONGO_CONNECTION_STRING=${{secrets.MONGO_CONNECTION_STRING}} johnathew/sleepie_mern:server-${{github.run_number}}
